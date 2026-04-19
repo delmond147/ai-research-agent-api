@@ -22,10 +22,12 @@ app = FastAPI(
 # In development, it allows localhost on common ports.
 
 allowed_origins = [
-    "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:4173",
 ]
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    allowed_origins.append(frontend_url)
 
 app.add_middleware(
     CORSMiddleware,
